@@ -1,59 +1,28 @@
 # Website Security Roaster 🔥
 
-A fun and informative web application that performs passive security reconnaissance on websites and presents the results in a roast-style format.
+Welcome to the Website Security Roaster!
 
-## Features
+## What is this?
+A fun and informative website that checks public information about any website you enter, then roasts its security in a playful way. All checks are passive and legal—no hacking, just public info!
 
-- URL validation and sanitization
-- DNS and WHOIS information gathering
-- HTTP headers analysis
-- Technology stack detection
-- Robots.txt analysis
-- Security score calculation
-- Fun roast-style results presentation
+## How do I use it?
+- Just visit the website link: **[YOUR WEBSITE LINK HERE]**
+- Enter any website URL you want to roast.
+- Get instant results—no installation, no setup, nothing to download!
 
-## Prerequisites
+## What does it do?
+- Checks public DNS, WHOIS, HTTP headers, robots.txt, and more (all passive, legal info)
+- Gives you a security score and a fun roast message
+- Explains the results in a way anyone can understand
 
-- Python 3.7+
-- pip (Python package manager)
+## Is it safe and legal?
+- Yes! This tool only uses passive, public information.
+- It does NOT hack, scan, or attack any website.
+- Use it responsibly and only for educational or entertainment purposes.
 
-## Installation
+## Disclaimer
+This tool is for fun and education. It may not detect all security measures, and results are based only on public, passive checks.
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd website-security-roaster
-```
+---
 
-2. Create a virtual environment (recommended):
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-## Usage
-
-1. Start the Flask application:
-```bash
-python app.py
-```
-
-2. Open your web browser and navigate to:
-```
-http://localhost:5000
-```
-
-3. Enter a URL in the input field and click "Roast It! 🔥"
-
-## Security Disclaimer
-
-⚠️ This tool performs only passive reconnaissance and may not detect all security measures. Use responsibly and only on websites you own or have permission to test.
-
-## License
-
-MIT License 
+**Enjoy roasting your favorite (or least favorite) websites!** 
