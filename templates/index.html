@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Security Roaster</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(120deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+        .card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .loading {
+            display: none;
+        }
+        .loading.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold mb-4">Website Security Roaster 🔥</h1>
+            <p class="text-gray-300">Enter a URL and let's roast its security!</p>
+        </div>
+
+        <div class="max-w-2xl mx-auto">
+            <div class="card rounded-lg p-6 mb-8">
+                <form id="scanForm" class="space-y-4">
+                    <div class="flex gap-4">
+                        <input type="text" id="url" placeholder="Enter website URL (e.g., example.com)" 
+                               class="flex-1 px-4 py-2 rounded bg-gray-800 text-white border border-gray-700 focus:border-blue-500 focus:outline-none">
+                        <button type="submit" 
+                                class="px-6 py-2 bg-red-600 hover:bg-red-700 rounded font-semibold transition-colors">
+                            Roast It! 🔥
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="loading" class="loading text-center mb-8">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
+                <p class="mt-4 text-gray-300">Analyzing website security...</p>
+            </div>
+
+            <div id="results" class="space-y-6" style="display: none;">
+                <div class="card rounded-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4">Security Score</h2>
+                    <div id="score" class="text-4xl font-bold text-center mb-4"></div>
+                    <div id="roast" class="text-xl text-center text-red-400"></div>
+                </div>
+
+                <div class="card rounded-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4">Technical Details</h2>
+                    <div id="technicalDetails" class="space-y-4"></div>
+                </div>
+
+                <div class="card rounded-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4">Security Headers</h2>
+                    <div id="headers" class="space-y-2"></div>
+                </div>
+
+                <div class="card rounded-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4">Technology Stack</h2>
+                    <div id="techStack" class="space-y-2"></div>
+                </div>
+
+                <div class="card rounded-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4">DNS Information</h2>
+                    <div id="dnsInfo" class="space-y-2"></div>
+                </div>
+
+                <div class="card rounded-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4">WHOIS Information</h2>
+                    <div id="whoisInfo" class="space-y-2"></div>
+                </div>
+
+                <div class="card rounded-lg p-6">
+                    <h2 class="text-2xl font-bold mb-4">Robots.txt</h2>
+                    <pre id="robotsTxt" class="bg-gray-800 p-4 rounded overflow-x-auto"></pre>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center text-gray-400 text-sm">
+                <p>⚠️ Disclaimer: This tool performs only passive reconnaissance and may not detect all security measures.</p>
+                <p>Use responsibly and only on websites you own or have permission to test.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('scanForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = document.getElementById('url').value;
+            
+            // Show loading
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('results').style.display = 'none';
+            
+            try {
+                const response = await fetch('/scan', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url }),
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayResults(data);
+                } else {
+                    alert(data.error || 'An error occurred');
+                }
+            } catch (error) {
+                alert('An error occurred while scanning the website');
+            } finally {
+                document.getElementById('loading').classList.remove('active');
+            }
+        });
+
+        function displayResults(data) {
+            // Display score and roast
+            document.getElementById('score').textContent = `${data.security_score}/10`;
+            document.getElementById('roast').textContent = data.roast;
+            
+            // Display technical details
+            const technicalDetails = document.getElementById('technicalDetails');
+            technicalDetails.innerHTML = `
+                <p><strong>URL:</strong> ${data.url}</p>
+                <p><strong>Domain:</strong> ${data.domain}</p>
+                <p><strong>Scan Time:</strong> ${data.scan_time}</p>
+            `;
+            
+            // Display headers
+            const headers = document.getElementById('headers');
+            headers.innerHTML = Object.entries(data.headers)
+                .map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
+                .join('');
+            
+            // Display tech stack
+            const techStack = document.getElementById('techStack');
+            techStack.innerHTML = Object.entries(data.tech_stack)
+                .map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
+                .join('');
+            
+            // Display DNS info
+            const dnsInfo = document.getElementById('dnsInfo');
+            dnsInfo.innerHTML = Object.entries(data.dns_info)
+                .map(([type, records]) => `<p><strong>${type}:</strong> ${records.join(', ')}</p>`)
+                .join('');
+            
+            // Display WHOIS info
+            const whoisInfo = document.getElementById('whoisInfo');
+            whoisInfo.innerHTML = Object.entries(data.whois_info)
+                .map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
+                .join('');
+            
+            // Display robots.txt
+            document.getElementById('robotsTxt').textContent = data.robots_txt;
+            
+            // Show results
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,12 @@
+flask==2.3.3
+requests==2.31.0
+dnspython==2.4.2
+python-whois==0.8.0
+beautifulsoup4==4.12.2
+cryptography==41.0.3
+python-dotenv==1.0.0
+validators==0.22.0
+shodan==1.30.0
+censys==2.2.0
+virustotal-python==1.0.1
+python-wappalyzer==0.3.0 
