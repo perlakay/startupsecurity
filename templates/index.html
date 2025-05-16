@@ -41,13 +41,13 @@
 </head>
 <body class="gradient-bg min-h-screen text-white">
     <div class="min-h-screen flex flex-col">
-        <header class="py-8 text-center">
-            <h1 class="text-5xl font-extrabold mb-2 tracking-tight">🔥 Website Security Roaster</h1>
-            <p class="text-gray-400 text-lg">Get roasted and learn about your website's security in style!</p>
-        </header>
         <main class="flex-1 flex flex-col items-center justify-center">
-            <div class="w-full max-w-2xl">
-                <div class="card rounded-xl p-8 mb-8">
+            <div class="w-full max-w-2xl flex flex-col items-center">
+                <div class="text-center mb-8">
+                    <h1 class="text-5xl font-extrabold mb-2 tracking-tight">🔥 Website Security Roaster</h1>
+                    <p class="text-gray-400 text-lg">Get roasted and learn about your website's security in style!</p>
+                </div>
+                <div class="card rounded-xl p-8 mb-8 w-full">
                     <form id="scanForm" class="flex flex-col sm:flex-row gap-4 items-center justify-center">
                         <input type="text" id="url" placeholder="Enter website URL (e.g., example.com)" class="flex-1 px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-blue-500 focus:outline-none text-lg shadow-md">
                         <button type="submit" class="px-8 py-3 bg-gradient-to-r from-pink-500 to-red-600 hover:from-red-600 hover:to-pink-500 rounded-lg font-bold text-lg shadow-lg transition-colors">Roast It! 🔥</button>
@@ -60,31 +60,31 @@
                     </svg>
                     <p class="mt-4 text-gray-300 text-lg">Roasting your website... 🔥</p>
                 </div>
-                <div id="results" class="space-y-8" style="display: none;">
-                    <div class="card rounded-xl p-8 flex flex-col items-center">
+                <div id="results" class="space-y-8 w-full max-w-4xl" style="display: none;">
+                    <div class="card rounded-xl p-8 flex flex-col items-center w-full">
                         <h2 class="text-3xl font-bold mb-2">🔥 Roast Result</h2>
                         <div id="roast" class="text-2xl text-pink-400 font-semibold text-center mb-2"></div>
                         <div id="score" class="text-5xl font-extrabold text-center mb-2"></div>
                         <p class="text-gray-400 text-center">This score is based on public, passive checks. Don't take it too personally!</p>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="card rounded-xl p-6">
+                    <div class="space-y-6">
+                        <div class="card rounded-xl p-6 w-full">
                             <h3 class="text-xl font-bold mb-2 flex items-center">DNS Records <span class="info-icon" title="DNS records show where your website lives on the internet and how it can be reached.">?</span></h3>
                             <div id="dnsInfo" class="space-y-1"></div>
                         </div>
-                        <div class="card rounded-xl p-6">
+                        <div class="card rounded-xl p-6 w-full">
                             <h3 class="text-xl font-bold mb-2 flex items-center">WHOIS Info <span class="info-icon" title="WHOIS info tells you who registered the domain and when it expires.">?</span></h3>
                             <div id="whoisInfo" class="space-y-1"></div>
                         </div>
-                        <div class="card rounded-xl p-6">
+                        <div class="card rounded-xl p-6 w-full">
                             <h3 class="text-xl font-bold mb-2 flex items-center">HTTP Headers <span class="info-icon" title="HTTP headers reveal server details and security settings.">?</span></h3>
                             <div id="headers" class="space-y-1"></div>
                         </div>
-                        <div class="card rounded-xl p-6">
+                        <div class="card rounded-xl p-6 w-full">
                             <h3 class="text-xl font-bold mb-2 flex items-center">Tech Stack <span class="info-icon" title="What technologies and frameworks power this website?">?</span></h3>
                             <div id="techStack" class="space-y-1"></div>
                         </div>
-                        <div class="card rounded-xl p-6 md:col-span-2">
+                        <div class="card rounded-xl p-6 w-full">
                             <h3 class="text-xl font-bold mb-2 flex items-center">robots.txt <span class="info-icon" title="robots.txt tells search engines what they can and can't crawl.">?</span></h3>
                             <pre id="robotsTxt" class="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm"></pre>
                         </div>
