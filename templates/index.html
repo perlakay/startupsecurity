@@ -17,6 +17,8 @@
             background: rgba(30, 41, 59, 0.95);
             box-shadow: 0 4px 24px rgba(0,0,0,0.2);
             border: 1px solid #22223b;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
         .info-icon {
             display: inline-block;
@@ -36,6 +38,10 @@
         }
         .loading.active {
             display: flex;
+        }
+        .break-all {
+            word-break: break-all;
+            overflow-wrap: break-word;
         }
     </style>
 </head>
@@ -68,25 +74,25 @@
                         <p class="text-gray-400 text-center">This score is based on public, passive checks. Don't take it too personally!</p>
                     </div>
                     <div class="space-y-6">
-                        <div class="card rounded-xl p-6 w-full">
+                        <div class="card rounded-xl p-6 w-full break-all">
                             <h3 class="text-xl font-bold mb-2 flex items-center">DNS Records <span class="info-icon" title="DNS records show where your website lives on the internet and how it can be reached.">?</span></h3>
                             <div id="dnsInfo" class="space-y-1"></div>
                         </div>
-                        <div class="card rounded-xl p-6 w-full">
+                        <div class="card rounded-xl p-6 w-full break-all">
                             <h3 class="text-xl font-bold mb-2 flex items-center">WHOIS Info <span class="info-icon" title="WHOIS info tells you who registered the domain and when it expires.">?</span></h3>
                             <div id="whoisInfo" class="space-y-1"></div>
                         </div>
-                        <div class="card rounded-xl p-6 w-full">
+                        <div class="card rounded-xl p-6 w-full break-all">
                             <h3 class="text-xl font-bold mb-2 flex items-center">HTTP Headers <span class="info-icon" title="HTTP headers reveal server details and security settings.">?</span></h3>
                             <div id="headers" class="space-y-1"></div>
                         </div>
-                        <div class="card rounded-xl p-6 w-full">
+                        <div class="card rounded-xl p-6 w-full break-all">
                             <h3 class="text-xl font-bold mb-2 flex items-center">Tech Stack <span class="info-icon" title="What technologies and frameworks power this website?">?</span></h3>
                             <div id="techStack" class="space-y-1"></div>
                         </div>
-                        <div class="card rounded-xl p-6 w-full">
+                        <div class="card rounded-xl p-6 w-full break-all">
                             <h3 class="text-xl font-bold mb-2 flex items-center">robots.txt <span class="info-icon" title="robots.txt tells search engines what they can and can't crawl.">?</span></h3>
-                            <pre id="robotsTxt" class="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm"></pre>
+                            <pre id="robotsTxt" class="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm break-all"></pre>
                         </div>
                     </div>
                 </div>
