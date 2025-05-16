@@ -83,6 +83,23 @@ def get_robots_txt(url):
     except:
         return "Error fetching robots.txt"
 
+def find_subdomains(domain):
+    try:
+        url = f'https://crt.sh/?q=%25.{domain}&output=json'
+        response = requests.get(url, timeout=10)
+        if response.status_code != 200:
+            return []
+        data = response.json()
+        subdomains = set()
+        for entry in data:
+            name_value = entry.get('name_value', '')
+            for sub in name_value.split('\n'):
+                if sub.endswith(domain):
+                    subdomains.add(sub.strip())
+        return sorted(subdomains)
+    except Exception as e:
+        return [f"Error: {e}"]
+
 def calculate_security_score(results):
     score = 10
     deductions = {
@@ -143,6 +160,7 @@ def scan():
         "headers": get_headers(url),
         "tech_stack": get_tech_stack(url),
         "robots_txt": get_robots_txt(url),
+        "subdomains": find_subdomains(domain),
         "scan_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
     

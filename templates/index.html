@@ -94,6 +94,10 @@
                             <h3 class="text-xl font-bold mb-2 flex items-center">robots.txt <span class="info-icon" title="robots.txt tells search engines what they can and can't crawl.">?</span></h3>
                             <pre id="robotsTxt" class="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm break-all"></pre>
                         </div>
+                        <div class="card rounded-xl p-6 w-full break-all">
+                            <h3 class="text-xl font-bold mb-2 flex items-center">Subdomains <span class="info-icon" title="Subdomains found via certificate transparency logs (crt.sh).">?</span></h3>
+                            <div id="subdomains" class="space-y-1"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-10 text-center text-gray-500 text-sm">
@@ -151,6 +155,13 @@
                 .join('');
             // robots.txt
             document.getElementById('robotsTxt').textContent = data.robots_txt;
+            // Subdomains
+            const subdomains = document.getElementById('subdomains');
+            if (Array.isArray(data.subdomains) && data.subdomains.length > 0) {
+                subdomains.innerHTML = data.subdomains.map(sub => `<div>${sub}</div>`).join('');
+            } else {
+                subdomains.innerHTML = '<div class="text-gray-400">No subdomains found.</div>';
+            }
             document.getElementById('results').style.display = 'block';
         }
     </script>
